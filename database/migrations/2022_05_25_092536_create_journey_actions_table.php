@@ -21,6 +21,11 @@ return new class extends Migration
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('input_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('journey_activity_id')->references('id')->on('journey_activities');
+            $table->foreign('action_id')->references('id')->on('actions');
+            $table->foreign('status_id')->references('id')->on('status');
+            $table->foreign('input_id')->references('id')->on('inputs');
         });
     }
 
