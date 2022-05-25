@@ -16,3 +16,9 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->get('/status', 'StatusController@index');
+$router->get('/status/{id}', 'StatusController@show');
+
+$router->get('/inputType', 'InputTypeController@index');
+$router->get('/inputType/{id}', 'InputTypeController@show');
