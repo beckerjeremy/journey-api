@@ -12,7 +12,7 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject
 {
-    use Authenticatable, Authorizable, HasFactory, Notifiable;
+    use Authenticatable, Authorizable, HasFactory;
 
     /**
      * The attributes that are mass assignable.

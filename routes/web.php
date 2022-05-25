@@ -17,8 +17,21 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/status', 'StatusController@index');
-$router->get('/status/{id}', 'StatusController@show');
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->get('/status', 'StatusController@index');
+    $router->get('/status/{id}', 'StatusController@show');
 
-$router->get('/inputType', 'InputTypeController@index');
-$router->get('/inputType/{id}', 'InputTypeController@show');
+    $router->get('/inputType', 'InputTypeController@index');
+    $router->get('/inputType/{id}', 'InputTypeController@show');
+
+    $router->post('/login', 'AuthController@login');
+    $router->post('/logout', 'AuthController@logout');
+    $router->post('/refresh', 'AuthController@refresh');
+    $router->post('/me', 'AuthController@me');
+
+    $router->get('/user', 'UserController@index');
+    $router->post('/user', 'UserController@store');
+    $router->get('/user/{id}', 'UserController@show');
+    $router->patch('/user/{id}', 'UserController@update');
+    $router->delete('/user/{id}', 'UserController@destroy');
+});
