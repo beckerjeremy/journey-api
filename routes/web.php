@@ -40,4 +40,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('/activity/{id}', 'ActivityController@show');
     $router->patch('/activity/{id}', 'ActivityController@update');
     $router->delete('/activity/{id}', 'ActivityController@destroy');
+
+    $router->get('/activity/{activity}/action', 'ActionController@index');
+    $router->post('/activity/{activity}/action', 'ActionController@store');
+    $router->get('/activity/{activity}/action/{id}', 'ActionController@show');
+    $router->patch('/activity/{activity}/action/{id}', 'ActionController@update');
+    $router->delete('/activity/{activity}/action/{id}', 'ActionController@destroy');
 });

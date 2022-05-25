@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\ActionBasicResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ActivityResource extends JsonResource
+class ActionBasicResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +16,12 @@ class ActivityResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'activity_id' => $this->activity_id,
+            'input_type_id' => $this->input_type_id,
+            'input_required' => $this->input_required,
             'name' => $this->name,
             'description' => $this->description,
-            'actions' => ActionBasicResource::collection($this->actions),
+            'order_weight' => $this->order_weight,
         ];
     }
 }
