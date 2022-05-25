@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('image_inputs', function (Blueprint $table) {
             $table->id();
+            $table->string('file_url')->nullable();
             $table->string('type')->nullable();
             $table->integer('width')->nullable();
             $table->integer('height')->nullable();
