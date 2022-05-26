@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class JourneyActionBasicResource extends JsonResource
+class InputBasicResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,9 @@ class JourneyActionBasicResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'journey_activity_id' => $this->journey_activity_id,
-            'action_id' => $this->action_id,
-            'started_at' => $this->started_at,
-            'status_id' => $this->status_id,
-            'input_id' => $this->input_id,
+            'name' => $this->name,
+            'data_type_id' => $this->data_type_id,
+            'data_type_type' => $this->data_type_type,
         ];
     }
 }

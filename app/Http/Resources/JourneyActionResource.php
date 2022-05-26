@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Http\Resources\ActionBasicResource;
+use App\Http\Resources\InputBasicResource;
 use App\Http\Resources\JourneyActivityBasicResource;
 use App\Http\Resources\StatusResource;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -18,11 +19,12 @@ class JourneyActionResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'journey_activity' => new JourneyActivityBasicResource($this->journey_activity),
             'action' => new ActionBasicResource($this->action),
             'started_at' => $this->started_at,
             'status' => new StatusResource($this->status),
-            'input_id' => $this->input_id, // ToDo: change to input resource when implemented
+            'input' => new InputResource($this->input),
         ];
     }
 }
