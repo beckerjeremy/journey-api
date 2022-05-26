@@ -52,4 +52,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('/journey/{id}', 'JourneyController@show');
     $router->patch('/journey/{id}', 'JourneyController@update');
     $router->delete('/journey/{id}', 'JourneyController@destroy');
+
+    $router->get('/journey/{journey}/activity', 'JourneyActivityController@index');
+    $router->post('/journey/{journey}/activity', 'JourneyActivityController@store');
+    $router->get('/journey/{journey}/activity/{id}', 'JourneyActivityController@show');
+    $router->patch('/journey/{journey}/activity/{id}', 'JourneyActivityController@update');
+    $router->delete('/journey/{journey}/activity/{id}', 'JourneyActivityController@destroy');
 });

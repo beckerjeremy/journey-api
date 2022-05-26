@@ -2,12 +2,13 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\JourneyActivityBasicResource;
+// ToDo: import and display journey actions when implemented
+use App\Http\Resources\ActivityBasicResource;
+use App\Http\Resources\JourneyBasicResource;
 use App\Http\Resources\StatusResource;
-use App\Http\Resources\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class JourneyResource extends JsonResource
+class JourneyActivitycResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,11 +20,10 @@ class JourneyResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
+            'journey' => new JourneyBasicResource($this->journey),
+            'activity' => new ActivityBasicResource($this->activity),
             'started_at' => $this->started_at,
             'status' => new StatusResource($this->status),
-            'user' => new UserResource($this->user),
-            'activities' => JourneyActivityBasicResource::collection($this->journey_activities),
         ];
     }
 }
