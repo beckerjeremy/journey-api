@@ -58,4 +58,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('/journey/{journey}/activity/{id}', 'JourneyActivityController@show');
     $router->patch('/journey/{journey}/activity/{id}', 'JourneyActivityController@update');
     $router->delete('/journey/{journey}/activity/{id}', 'JourneyActivityController@destroy');
+
+    $router->get('/journey/{journey}/activity/{activity}/action', 'JourneyActionController@index');
+    $router->post('/journey/{journey}/activity/{activity}/action', 'JourneyActionController@store');
+    $router->get('/journey/{journey}/activity/{activity}/action/{id}', 'JourneyActionController@show');
+    $router->patch('/journey/{journey}/activity/{activity}/action/{id}', 'JourneyActionController@update');
+    $router->delete('/journey/{journey}/activity/{activity}/action/{id}', 'JourneyActionController@destroy');
 });
