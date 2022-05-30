@@ -10,12 +10,279 @@
         }
     ],
     "paths": {
+        "/activity/{activity}/action": {
+            "get": {
+                "tags": [
+                    "action"
+                ],
+                "summary": "List Actions",
+                "description": "Get a list of all actions from the activity.",
+                "operationId": "actionList",
+                "parameters": [
+                    {
+                        "name": "activity",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Action"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The activity does not exist."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "action"
+                ],
+                "summary": "Create action",
+                "description": "Create a new action for the activity.",
+                "operationId": "actionCreate",
+                "parameters": [
+                    {
+                        "name": "activity",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "input_type_id",
+                        "in": "query",
+                        "description": "The reference to the input type.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "input_required",
+                        "in": "query",
+                        "description": "If the input is required or not.",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "The name of the action.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "A short description of the action.",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Action"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The entered parameters are not valid."
+                    },
+                    "404": {
+                        "description": "The activity does not exist."
+                    }
+                }
+            }
+        },
+        "/activity/{activity}/action/{id}": {
+            "get": {
+                "tags": [
+                    "action"
+                ],
+                "summary": "Show action",
+                "description": "Get a single action from an activity by id.",
+                "operationId": "actionShow",
+                "parameters": [
+                    {
+                        "name": "activity",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Activity"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The activity or action does not exist."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "action"
+                ],
+                "summary": "Delete action",
+                "description": "Delete an action of an activity.",
+                "operationId": "actionDelete",
+                "parameters": [
+                    {
+                        "name": "activity",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "The activity or action does not exist."
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "action"
+                ],
+                "summary": "Update action",
+                "description": "Update an existing action of an activity.",
+                "operationId": "actionUpdate",
+                "parameters": [
+                    {
+                        "name": "activity",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "input_type_id",
+                        "in": "query",
+                        "description": "The reference to the input type.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "input_required",
+                        "in": "query",
+                        "description": "If the input is required or not.",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "The name of the action.",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "A short description of the action.",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Activity"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The entered parameters are not valid."
+                    },
+                    "404": {
+                        "description": "The activity or action does not exist."
+                    }
+                }
+            }
+        },
         "/activity": {
             "get": {
                 "tags": [
                     "activity"
                 ],
-                "summary": "List Activities",
+                "summary": "List activities",
                 "description": "Get a list of all activities.",
                 "operationId": "activityList",
                 "responses": {
@@ -38,7 +305,7 @@
                 "tags": [
                     "activity"
                 ],
-                "summary": "Create Activity",
+                "summary": "Create activity",
                 "description": "Create a new activity.",
                 "operationId": "activityCreate",
                 "parameters": [
@@ -83,7 +350,7 @@
                 "tags": [
                     "activity"
                 ],
-                "summary": "Show Activity",
+                "summary": "Show activity",
                 "description": "Get a single activity by id.",
                 "operationId": "activityShow",
                 "parameters": [
@@ -186,6 +453,9 @@
                     },
                     "422": {
                         "description": "The entered parameters are not valid."
+                    },
+                    "404": {
+                        "description": "The activity does not exist."
                     }
                 }
             }
@@ -430,6 +700,48 @@
     },
     "components": {
         "schemas": {
+            "Action": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "activity": {
+                        "$ref": "#/components/schemas/Activity"
+                    },
+                    "input_type": {
+                        "$ref": "#/components/schemas/InputType"
+                    },
+                    "input_required": {
+                        "type": "boolean",
+                        "example": "true"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Take Photo"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Now the photo will be taken by the selfie box."
+                    },
+                    "created_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    },
+                    "updated_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Activity"
+                }
+            },
             "Activity": {
                 "required": [
                     "name"

@@ -12,7 +12,7 @@ class ActivityController extends Controller
     /**
      * @OA\Get(
      *  path="/activity",
-     *  summary="List Activities",
+     *  summary="List activities",
      *  description="Get a list of all activities.",
      *  operationId="activityList",
      *  tags={"activity"},
@@ -38,7 +38,7 @@ class ActivityController extends Controller
     /**
      * @OA\Post(
      *  path="/activity",
-     *  summary="Create Activity",
+     *  summary="Create activity",
      *  description="Create a new activity.",
      *  operationId="activityCreate",
      *  tags={"activity"},
@@ -94,7 +94,7 @@ class ActivityController extends Controller
     /**
      * @OA\Get(
      *  path="/activity/{id}",
-     *  summary="Show Activity",
+     *  summary="Show activity",
      *  description="Get a single activity by id.",
      *  operationId="activityShow",
      *  tags={"activity"},
@@ -168,6 +168,10 @@ class ActivityController extends Controller
      *  @OA\Response(
      *      response=422,
      *      description="The entered parameters are not valid.",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The activity does not exist.",
      *  ),
      * )
      * 

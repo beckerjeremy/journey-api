@@ -1,6 +1,5 @@
 # Journey API
 
-## Build Setup
 ```bash
 # install dependencies
 $ composer install

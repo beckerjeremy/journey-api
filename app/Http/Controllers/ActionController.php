@@ -11,6 +11,34 @@ use Illuminate\Http\Request;
 class ActionController extends Controller
 {
     /**
+     * @OA\Get(
+     *  path="/activity/{activity}/action",
+     *  summary="List Actions",
+     *  description="Get a list of all actions from the activity.",
+     *  operationId="actionList",
+     *  tags={"action"},
+     *  @OA\Parameter(
+     *      name="activity",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(
+     *          type="array",
+     *          @OA\Items(ref="#/components/schemas/Action"),
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The activity does not exist.",
+     *  ),
+     * )
+     * 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -22,6 +50,71 @@ class ActionController extends Controller
     }
 
     /**
+     * @OA\Post(
+     *  path="/activity/{activity}/action",
+     *  summary="Create action",
+     *  description="Create a new action for the activity.",
+     *  operationId="actionCreate",
+     *  tags={"action"},
+     *  @OA\Parameter(
+     *      name="activity",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="input_type_id",
+     *      description="The reference to the input type.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="input_required",
+     *      description="If the input is required or not.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="boolean",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="name",
+     *      description="The name of the action.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="description",
+     *      description="A short description of the action.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/Action"),
+     *  ),
+     *  @OA\Response(
+     *      response=422,
+     *      description="The entered parameters are not valid.",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The activity does not exist.",
+     *  ),
+     * )
+     * 
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -52,6 +145,39 @@ class ActionController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *  path="/activity/{activity}/action/{id}",
+     *  summary="Show action",
+     *  description="Get a single action from an activity by id.",
+     *  operationId="actionShow",
+     *  tags={"action"},
+     *  @OA\Parameter(
+     *      name="activity",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/Activity"),
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The activity or action does not exist.",
+     *  ),
+     * )
+     * 
      * Display the specified resource.
      *
      * @param  int  $id
@@ -70,6 +196,79 @@ class ActionController extends Controller
     }
 
     /**
+     * @OA\Patch(
+     *  path="/activity/{activity}/action/{id}",
+     *  summary="Update action",
+     *  description="Update an existing action of an activity.",
+     *  operationId="actionUpdate",
+     *  tags={"action"},
+     *  @OA\Parameter(
+     *      name="activity",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="input_type_id",
+     *      description="The reference to the input type.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="input_required",
+     *      description="If the input is required or not.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="boolean",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="name",
+     *      description="The name of the action.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="description",
+     *      description="A short description of the action.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/Activity"),
+     *  ),
+     *  @OA\Response(
+     *      response=422,
+     *      description="The entered parameters are not valid.",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The activity or action does not exist.",
+     *  ),
+     * )
+     * 
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -104,6 +303,38 @@ class ActionController extends Controller
     }
 
     /**
+     * @OA\Delete(
+     *  path="/activity/{activity}/action/{id}",
+     *  summary="Delete action",
+     *  description="Delete an action of an activity.",
+     *  operationId="actionDelete",
+     *  tags={"action"},
+     *  @OA\Parameter(
+     *      name="activity",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The activity or action does not exist.",
+     *  ),
+     * )
+     * 
      * Remove the specified resource from storage.
      *
      * @param  int  $id
