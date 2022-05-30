@@ -71,21 +71,21 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->patch('/input/{id}', 'InputController@update');
     $router->delete('/input/{id}', 'InputController@destroy');
 
-    $router->get('/input/text', 'TextInputController@index');
-    $router->post('/input/text', 'TextInputController@store');
-    $router->get('/input/text/{id}', 'TextInputController@show');
-    $router->patch('/input/text/{id}', 'TextInputController@update');
-    $router->delete('/input/text/{id}', 'TextInputController@destroy');
+    $router->get('/text', 'TextInputController@index');
+    $router->post('/text', 'TextInputController@store');
+    $router->get('/text/{id}', 'TextInputController@show');
+    $router->patch('/text/{id}', 'TextInputController@update');
+    $router->delete('/text/{id}', 'TextInputController@destroy');
 
-    $router->get('/input/image', 'ImageInputController@index');
-    $router->post('/input/image', 'ImageInputController@store');
-    $router->get('/input/image/{id}', 'ImageInputController@show');
-    $router->patch('/input/image/{id}', 'ImageInputController@update');
-    $router->delete('/input/image/{id}', 'ImageInputController@destroy');
+    $router->get('/image', 'ImageInputController@index');
+    $router->post('/image', 'ImageInputController@store');
+    $router->get('/image/{id}', 'ImageInputController@show');
+    $router->patch('/image/{id}', 'ImageInputController@update');
+    $router->delete('/image/{id}', 'ImageInputController@destroy');
 
-    $router->get('/input/video', 'VideoInputController@index');
-    $router->post('/input/video', 'VideoInputController@store');
-    $router->get('/input/video/{id}', 'VideoInputController@show');
-    $router->patch('/input/video/{id}', 'VideoInputController@update');
-    $router->delete('/input/video/{id}', 'VideoInputController@destroy');
+    $router->get('/video', 'VideoInputController@index');
+    $router->post('/video', 'VideoInputController@store');
+    $router->get('/video/{id}', 'VideoInputController@show');
+    $router->patch('/video/{id}', 'VideoInputController@update');
+    $router->delete('/video/{id}', 'VideoInputController@destroy');
 });

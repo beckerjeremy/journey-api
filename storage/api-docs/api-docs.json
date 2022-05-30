@@ -34,6 +34,44 @@
                     }
                 }
             }
+        },
+        "/status/{id}": {
+            "get": {
+                "tags": [
+                    "status"
+                ],
+                "summary": "Show status",
+                "description": "Get a single status by id.",
+                "operationId": "statusShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Status"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The status does not exist."
+                    }
+                }
+            }
         }
     },
     "components": {
