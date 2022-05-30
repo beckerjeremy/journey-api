@@ -11,6 +11,34 @@ use Illuminate\Http\Request;
 class JourneyActivityController extends Controller
 {
     /**
+     * @OA\Get(
+     *  path="/journey/{journey}/activity",
+     *  summary="List activities",
+     *  description="Get a list of all activities of a journey.",
+     *  operationId="journeyActivityList",
+     *  tags={"journeyActivity"},
+     *  @OA\Parameter(
+     *      name="journey",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(
+     *          type="array",
+     *          @OA\Items(ref="#/components/schemas/JourneyActivity"),
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The journey does not exist.",
+     *  ),
+     * )
+     * 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -22,6 +50,62 @@ class JourneyActivityController extends Controller
     }
 
     /**
+     * @OA\Post(
+     *  path="/journey/{journey}/activity",
+     *  summary="Create activity",
+     *  description="Create a new activity for the journey.",
+     *  operationId="journeyActivityCreate",
+     *  tags={"journeyActivity"},
+     *  @OA\Parameter(
+     *      name="journey",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="activity_id",
+     *      description="The reference to the activity the user starts.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="started_at",
+     *      description="The date and time the activity was started.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="date",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="status_id",
+     *      description="The reference to the status of the activity.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/JourneyActivity"),
+     *  ),
+     *  @OA\Response(
+     *      response=422,
+     *      description="The entered parameters are not valid.",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The journey does not exist.",
+     *  ),
+     * )
+     * 
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -48,6 +132,39 @@ class JourneyActivityController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *  path="/journey/{journey}/activity/{id}",
+     *  summary="Show activity",
+     *  description="Get a single activity from a journey by id.",
+     *  operationId="journeyActivityShow",
+     *  tags={"journeyActivity"},
+     *  @OA\Parameter(
+     *      name="journey",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/JourneyActivity"),
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The journey or activity does not exist.",
+     *  ),
+     * )
+     * 
      * Display the specified resource.
      *
      * @param  int  $id
@@ -66,6 +183,70 @@ class JourneyActivityController extends Controller
     }
 
     /**
+     * @OA\Patch(
+     *  path="/journey/{journey}/activity/{id}",
+     *  summary="Update activity",
+     *  description="Update an existing activity of a journey.",
+     *  operationId="journeyActivityUpdate",
+     *  tags={"journeyActivity"},
+     *  @OA\Parameter(
+     *      name="journey",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="activity_id",
+     *      description="The reference to the activity the user starts.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="started_at",
+     *      description="The date and time the activity was started.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="date",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="status_id",
+     *      description="The reference to the status of the activity.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/JourneyActivity"),
+     *  ),
+     *  @OA\Response(
+     *      response=422,
+     *      description="The entered parameters are not valid.",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The journey or activity does not exist.",
+     *  ),
+     * )
+     * 
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -96,6 +277,38 @@ class JourneyActivityController extends Controller
     }
 
     /**
+     * @OA\Delete(
+     *  path="/journey/{journey}/activity/{id}",
+     *  summary="Delete activity",
+     *  description="Delete an activity of a journey.",
+     *  operationId="journeyActivityDelete",
+     *  tags={"journeyActivity"},
+     *  @OA\Parameter(
+     *      name="journey",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The journey or activity does not exist.",
+     *  ),
+     * )
+     * 
      * Remove the specified resource from storage.
      *
      * @param  int  $id
