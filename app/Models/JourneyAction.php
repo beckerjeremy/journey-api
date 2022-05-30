@@ -4,6 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @OA\Schema(
+ *  required={"name", "status"},
+ *  @OA\Xml(name="JourneyAction"),
+ *  @OA\Property(property="id", type="integer", readOnly="true", example="1"),
+ *  @OA\Property(property="journey_activity", ref="#/components/schemas/JourneyActivity"),
+ *  @OA\Property(property="action", ref="#/components/schemas/Action"),
+ *  @OA\Property(property="started_at", type="date", example="2022-05-25 22:15:23"),
+ *  @OA\Property(property="status", ref="#/components/schemas/Status"),
+ *  @OA\Property(property="input", ref="#/components/schemas/Input"),
+ *  @OA\Property(property="created_at", type="date", example="2022-05-25 22:15:23"),
+ *  @OA\Property(property="updated_at", type="date", example="2022-05-25 22:15:23"),
+ * )
+ */
 class JourneyAction extends Model
 {
     /**

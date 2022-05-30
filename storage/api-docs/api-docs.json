@@ -838,6 +838,313 @@
                 }
             }
         },
+        "/journey/{journey}/activity/{activity}/action": {
+            "get": {
+                "tags": [
+                    "journeyAction"
+                ],
+                "summary": "List actions",
+                "description": "Get a list of all actions of a journey activity.",
+                "operationId": "journeyActionList",
+                "parameters": [
+                    {
+                        "name": "journey",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "activity",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/JourneyAction"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The journey or activity does not exist."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "journeyAction"
+                ],
+                "summary": "Create activity",
+                "description": "Create a new action for the journey activity.",
+                "operationId": "journeyActionCreate",
+                "parameters": [
+                    {
+                        "name": "journey",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "activity",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "action_id",
+                        "in": "query",
+                        "description": "The reference to the action the user starts.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "started_at",
+                        "in": "query",
+                        "description": "The date and time the action was started.",
+                        "required": false,
+                        "schema": {
+                            "type": "date"
+                        }
+                    },
+                    {
+                        "name": "status_id",
+                        "in": "query",
+                        "description": "The reference to the status of the action.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "input_id",
+                        "in": "query",
+                        "description": "The reference to the input attached to the action.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JourneyAction"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The entered parameters are not valid."
+                    },
+                    "404": {
+                        "description": "The journey or activity does not exist."
+                    }
+                }
+            }
+        },
+        "/journey/{journey}/activity/{activity}/action/{id}": {
+            "get": {
+                "tags": [
+                    "journeyAction"
+                ],
+                "summary": "Show action",
+                "description": "Get a single action from a journey activity by id.",
+                "operationId": "journeyActionShow",
+                "parameters": [
+                    {
+                        "name": "journey",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "activity",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JourneyAction"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The journey, activity or action does not exist."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "journeyAction"
+                ],
+                "summary": "Delete action",
+                "description": "Delete an action of a journey activity.",
+                "operationId": "journeyActionDelete",
+                "parameters": [
+                    {
+                        "name": "journey",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "activity",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "The journey, activity or action does not exist."
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "journeyAction"
+                ],
+                "summary": "Update action",
+                "description": "Update an existing action of a journey activity.",
+                "operationId": "journeyActionUpdate",
+                "parameters": [
+                    {
+                        "name": "journey",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "activity",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "action_id",
+                        "in": "query",
+                        "description": "The reference to the action the user starts.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "started_at",
+                        "in": "query",
+                        "description": "The date and time the action was started.",
+                        "required": false,
+                        "schema": {
+                            "type": "date"
+                        }
+                    },
+                    {
+                        "name": "status_id",
+                        "in": "query",
+                        "description": "The reference to the status of the action.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "input_id",
+                        "in": "query",
+                        "description": "The reference to the input attached to the action.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JourneyAction"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The entered parameters are not valid."
+                    },
+                    "404": {
+                        "description": "The journey, activity or action does not exist."
+                    }
+                }
+            }
+        },
         "/journey/{journey}/activity": {
             "get": {
                 "tags": [
@@ -1547,6 +1854,47 @@
                 "type": "object",
                 "xml": {
                     "name": "Journey"
+                }
+            },
+            "JourneyAction": {
+                "required": [
+                    "name",
+                    "status"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "journey_activity": {
+                        "$ref": "#/components/schemas/JourneyActivity"
+                    },
+                    "action": {
+                        "$ref": "#/components/schemas/Action"
+                    },
+                    "started_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/Status"
+                    },
+                    "input": {
+                        "$ref": "#/components/schemas/Input"
+                    },
+                    "created_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    },
+                    "updated_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "JourneyAction"
                 }
             },
             "JourneyActivity": {
