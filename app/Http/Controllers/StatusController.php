@@ -52,10 +52,7 @@ class StatusController extends Controller
      *  @OA\Response(
      *      response=200,
      *      description="Success",
-     *      @OA\JsonContent(
-     *          type="array",
-     *          @OA\Items(ref="#/components/schemas/Status"),
-     *      ),
+     *      @OA\JsonContent(ref="#/components/schemas/Status"),
      *  ),
      *  @OA\Response(
      *      response=404,

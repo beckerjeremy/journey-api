@@ -10,6 +10,66 @@
         }
     ],
     "paths": {
+        "/inputType": {
+            "get": {
+                "tags": [
+                    "inputType"
+                ],
+                "summary": "List input types",
+                "description": "Get a list of all input types.",
+                "operationId": "inputTypeList",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/InputType"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/inputType/{id}": {
+            "get": {
+                "tags": [
+                    "inputType"
+                ],
+                "summary": "Show input type",
+                "description": "Get a single input type by id.",
+                "operationId": "inputTypeShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/InputType"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The input type does not exist."
+                    }
+                }
+            }
+        },
         "/status": {
             "get": {
                 "tags": [
@@ -59,10 +119,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Status"
-                                    }
+                                    "$ref": "#/components/schemas/Status"
                                 }
                             }
                         }
@@ -76,6 +133,42 @@
     },
     "components": {
         "schemas": {
+            "InputType": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Image"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "The user has to submit an image input."
+                    },
+                    "class_name": {
+                        "type": "string",
+                        "example": "App\\\\Models\\\\ImageInput"
+                    },
+                    "created_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    },
+                    "updated_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "InputType"
+                }
+            },
             "Status": {
                 "required": [
                     "name"
