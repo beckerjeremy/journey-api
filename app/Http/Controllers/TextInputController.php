@@ -86,7 +86,7 @@ class TextInputController extends Controller
     public function destroy($id)
     {
         $textInput = TextInput::findOrFail($id);
-        $textInput->input->delete();
+        if ($textInput->input) $textInput->input->delete();
         $textInput->delete();
     }
 }

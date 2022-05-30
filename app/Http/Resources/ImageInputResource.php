@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\InputBasicResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TextInputBasicResource extends JsonResource
+class ImageInputResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,8 +17,10 @@ class TextInputBasicResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'input_id' => $this->input == null ? null : $this->input->id,
-            'text' => $this->id,
+            'input' => new InputBasicResource($this->input),
+            'file_url' => $this->file_url,
+            'type' => $this->type,
+            'size' => $this->size,
         ];
     }
 }
