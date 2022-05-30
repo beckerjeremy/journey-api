@@ -637,6 +637,225 @@
                 }
             }
         },
+        "/journey": {
+            "get": {
+                "tags": [
+                    "journey"
+                ],
+                "summary": "List journeys",
+                "description": "Get a list of all journeys.",
+                "operationId": "journeyList",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Journey"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "journey"
+                ],
+                "summary": "Create journey",
+                "description": "Create a new journey.",
+                "operationId": "journeyCreate",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "The name of the activity.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "started_at",
+                        "in": "query",
+                        "description": "The date and time when the journey has been started.",
+                        "required": false,
+                        "schema": {
+                            "type": "date"
+                        }
+                    },
+                    {
+                        "name": "status_id",
+                        "in": "query",
+                        "description": "The id of the status of the journey.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "The id of the user the journey belongs to.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Journey"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The entered parameters are not valid."
+                    }
+                }
+            }
+        },
+        "/journey/{id}": {
+            "get": {
+                "tags": [
+                    "journey"
+                ],
+                "summary": "Show journey",
+                "description": "Get a single journey by id.",
+                "operationId": "journeyShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Journey"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The journey does not exist."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "journey"
+                ],
+                "summary": "Delete journey",
+                "description": "Delete a journey.",
+                "operationId": "journeyDelete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "The journey does not exist."
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "journey"
+                ],
+                "summary": "Update journey",
+                "description": "Update an existing journey.",
+                "operationId": "journeyUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "The name of the activity.",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "started_at",
+                        "in": "query",
+                        "description": "The date and time when the journey has been started.",
+                        "required": false,
+                        "schema": {
+                            "type": "date"
+                        }
+                    },
+                    {
+                        "name": "status_id",
+                        "in": "query",
+                        "description": "The id of the status of the journey.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "The id of the user the journey belongs to.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Journey"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The entered parameters are not valid."
+                    },
+                    "404": {
+                        "description": "The journey does not exist."
+                    }
+                }
+            }
+        },
         "/status": {
             "get": {
                 "tags": [
@@ -808,6 +1027,45 @@
                 "type": "object",
                 "xml": {
                     "name": "InputType"
+                }
+            },
+            "Journey": {
+                "required": [
+                    "name",
+                    "status"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Selfie-box Journey"
+                    },
+                    "started_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/Status"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "created_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    },
+                    "updated_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Journey"
                 }
             },
             "Status": {
