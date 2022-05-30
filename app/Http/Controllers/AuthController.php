@@ -18,6 +18,44 @@ class AuthController extends Controller
     }
 
     /**
+     * * @OA\Post(
+     *  path="/login",
+     *  summary="Log in",
+     *  description="Log in and get an access token.",
+     *  operationId="authLogin",
+     *  tags={"auth"},
+     *  @OA\Parameter(
+     *      name="email",
+     *      description="The email of the user.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="password",
+     *      description="The chosen password of the user.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Login successful.",
+     *  ),
+     *  @OA\Response(
+     *      response=422,
+     *      description="The entered parameters are not valid.",
+     *  ),
+     *  @OA\Response(
+     *      response=401,
+     *      description="The given e-mail and password do not match.",
+     *  ),
+     * )
+     *
      * Get a JWT via given credentials.
      *
      * @return \Illuminate\Http\JsonResponse
@@ -34,6 +72,24 @@ class AuthController extends Controller
     }
 
     /**
+     * @OA\Post(
+     *  path="/me",
+     *  summary="Me",
+     *  description="Get the user of the current token.",
+     *  operationId="authMe",
+     *  tags={"auth"},
+     *  security={{"apiAuth": {}}},
+     *  @OA\Response(
+     *      response=200,
+     *      description="Your access token time is refreshed.",
+     *      @OA\JsonContent(ref="#/components/schemas/User"),
+     *  ),
+     *  @OA\Response(
+     *      response=401,
+     *      description="Authorization token invalid.",
+     *  ),
+     * )
+     * 
      * Get the authenticated User.
      *
      * @return \Illuminate\Http\JsonResponse
@@ -44,6 +100,23 @@ class AuthController extends Controller
     }
 
     /**
+     * @OA\Post(
+     *  path="/logout",
+     *  summary="Log out",
+     *  description="Log out and make the token invalid.",
+     *  operationId="authLogout",
+     *  tags={"auth"},
+     *  security={{"apiAuth": {}}},
+     *  @OA\Response(
+     *      response=200,
+     *      description="Log out successful.",
+     *  ),
+     *  @OA\Response(
+     *      response=401,
+     *      description="Authorization token invalid.",
+     *  ),
+     * )
+     * 
      * Log the user out (Invalidate the token).
      *
      * @return \Illuminate\Http\JsonResponse
@@ -56,6 +129,23 @@ class AuthController extends Controller
     }
 
     /**
+     * @OA\Post(
+     *  path="/refresh",
+     *  summary="Refresh",
+     *  description="Refresh the time on the access token.",
+     *  operationId="authRefresh",
+     *  tags={"auth"},
+     *  security={{"apiAuth": {}}},
+     *  @OA\Response(
+     *      response=200,
+     *      description="Your access token time is refreshed.",
+     *  ),
+     *  @OA\Response(
+     *      response=401,
+     *      description="Authorization token invalid.",
+     *  ),
+     * )
+     * 
      * Refresh a token.
      *
      * @return \Illuminate\Http\JsonResponse

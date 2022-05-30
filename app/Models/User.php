@@ -10,6 +10,21 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * @OA\Schema(
+ *  required={"first_name", "family_name", "email", "password"},
+ *  @OA\Xml(name="User"),
+ *  @OA\Property(property="id", type="integer", readOnly="true", example="1"),
+ *  @OA\Property(property="first_name", type="string", example="Jeremy"),
+ *  @OA\Property(property="family_name", type="string", example="Becker"),
+ *  @OA\Property(property="email", type="string", example="jeremy@becker.dev"),
+ *  @OA\Property(property="password", type="string"),
+ *  @OA\Property(property="language", type="string", example="de"),
+ *  @OA\Property(property="is_admin", type="boolean", example="true"),
+ *  @OA\Property(property="created_at", type="date", example="2022-05-25 22:15:23"),
+ *  @OA\Property(property="updated_at", type="date", example="2022-05-25 22:15:23"),
+ * )
+ */
 class User extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject
 {
     use Authenticatable, Authorizable, HasFactory;

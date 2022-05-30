@@ -10,6 +10,123 @@
         }
     ],
     "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Log in",
+                "description": "Log in and get an access token.",
+                "operationId": "authLogin",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "The email of the user.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "The chosen password of the user.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Login successful."
+                    },
+                    "422": {
+                        "description": "The entered parameters are not valid."
+                    },
+                    "401": {
+                        "description": "The given e-mail and password do not match."
+                    }
+                }
+            }
+        },
+        "/me": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Me",
+                "description": "Get the user of the current token.",
+                "operationId": "authMe",
+                "responses": {
+                    "200": {
+                        "description": "Your access token time is refreshed.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authorization token invalid."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Log out",
+                "description": "Log out and make the token invalid.",
+                "operationId": "authLogout",
+                "responses": {
+                    "200": {
+                        "description": "Log out successful."
+                    },
+                    "401": {
+                        "description": "Authorization token invalid."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/refresh": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Refresh",
+                "description": "Refresh the time on the access token.",
+                "operationId": "authRefresh",
+                "responses": {
+                    "200": {
+                        "description": "Your access token time is refreshed."
+                    },
+                    "401": {
+                        "description": "Authorization token invalid."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/inputType": {
             "get": {
                 "tags": [
@@ -188,6 +305,66 @@
                 "xml": {
                     "name": "Status"
                 }
+            },
+            "User": {
+                "required": [
+                    "first_name",
+                    "family_name",
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "first_name": {
+                        "type": "string",
+                        "example": "Jeremy"
+                    },
+                    "family_name": {
+                        "type": "string",
+                        "example": "Becker"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "jeremy@becker.dev"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "type": "string",
+                        "example": "de"
+                    },
+                    "is_admin": {
+                        "type": "boolean",
+                        "example": "true"
+                    },
+                    "created_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    },
+                    "updated_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "User"
+                }
+            }
+        },
+        "securitySchemes": {
+            "apiAuth": {
+                "type": "http",
+                "description": "Login with email and password to get the authentication token",
+                "name": "Token based Based",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     }
