@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @OA\Schema(
  *  required={"name"},
- *  @OA\Xml(name="Activity"),
+ *  @OA\Xml(name="Action"),
  *  @OA\Property(property="id", type="integer", readOnly="true", example="1"),
  *  @OA\Property(property="activity", ref="#/components/schemas/Activity"),
  *  @OA\Property(property="input_type", ref="#/components/schemas/InputType"),

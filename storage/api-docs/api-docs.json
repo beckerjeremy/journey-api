@@ -577,6 +577,207 @@
                 ]
             }
         },
+        "/input": {
+            "get": {
+                "tags": [
+                    "input"
+                ],
+                "summary": "List inputs",
+                "description": "Get a list of all inputs.",
+                "operationId": "inputList",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Input"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "input"
+                ],
+                "summary": "Create input",
+                "description": "Create a new input.",
+                "operationId": "inputCreate",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "The name of the input.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "data_type_id",
+                        "in": "query",
+                        "description": "The id of the specialized object.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "data_type_type",
+                        "in": "query",
+                        "description": "The class name of the specialized object.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Input"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The entered parameters are not valid."
+                    }
+                }
+            }
+        },
+        "/input/{id}": {
+            "get": {
+                "tags": [
+                    "input"
+                ],
+                "summary": "Show input",
+                "description": "Get a single input by id.",
+                "operationId": "inputShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Input"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The input does not exist."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "input"
+                ],
+                "summary": "Delete input",
+                "description": "Delete an input.",
+                "operationId": "inputDelete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "The input does not exist."
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "input"
+                ],
+                "summary": "Update input",
+                "description": "Update an existing input.",
+                "operationId": "inputUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "The name of the input.",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "data_type_id",
+                        "in": "query",
+                        "description": "The id of the specialized object.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "data_type_type",
+                        "in": "query",
+                        "description": "The class name of the specialized object.",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Input"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The entered parameters are not valid."
+                    },
+                    "404": {
+                        "description": "The input does not exist."
+                    }
+                }
+            }
+        },
         "/inputType": {
             "get": {
                 "tags": [
@@ -958,7 +1159,7 @@
                 },
                 "type": "object",
                 "xml": {
-                    "name": "Activity"
+                    "name": "Action"
                 }
             },
             "Activity": {
@@ -991,6 +1192,37 @@
                 "type": "object",
                 "xml": {
                     "name": "Activity"
+                }
+            },
+            "Input": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Take Photo"
+                    },
+                    "data_type_id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "data_type_type": {
+                        "type": "string",
+                        "example": "App\\\\Models\\\\ImageInput"
+                    },
+                    "created_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    },
+                    "updated_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Input"
                 }
             },
             "InputType": {

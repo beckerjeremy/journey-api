@@ -10,6 +10,22 @@ use Illuminate\Http\Request;
 class InputController extends Controller
 {
     /**
+     * @OA\Get(
+     *  path="/input",
+     *  summary="List inputs",
+     *  description="Get a list of all inputs.",
+     *  operationId="inputList",
+     *  tags={"input"},
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(
+     *          type="array",
+     *          @OA\Items(ref="#/components/schemas/Input"),
+     *      ),
+     *  ),
+     * )
+     * 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -20,6 +36,50 @@ class InputController extends Controller
     }
 
     /**
+     * @OA\Post(
+     *  path="/input",
+     *  summary="Create input",
+     *  description="Create a new input.",
+     *  operationId="inputCreate",
+     *  tags={"input"},
+     *  @OA\Parameter(
+     *      name="name",
+     *      description="The name of the input.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="data_type_id",
+     *      description="The id of the specialized object.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="data_type_type",
+     *      description="The class name of the specialized object.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/Input"),
+     *  ),
+     *  @OA\Response(
+     *      response=422,
+     *      description="The entered parameters are not valid.",
+     *  ),
+     * )
+     * 
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -42,6 +102,31 @@ class InputController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *  path="/input/{id}",
+     *  summary="Show input",
+     *  description="Get a single input by id.",
+     *  operationId="inputShow",
+     *  tags={"input"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/Input"),
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The input does not exist.",
+     *  ),
+     * )
+     * 
      * Display the specified resource.
      *
      * @param  int  $id
@@ -53,6 +138,62 @@ class InputController extends Controller
     }
 
     /**
+     * @OA\Patch(
+     *  path="/input/{id}",
+     *  summary="Update input",
+     *  description="Update an existing input.",
+     *  operationId="inputUpdate",
+     *  tags={"input"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="name",
+     *      description="The name of the input.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="data_type_id",
+     *      description="The id of the specialized object.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="data_type_type",
+     *      description="The class name of the specialized object.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/Input"),
+     *  ),
+     *  @OA\Response(
+     *      response=422,
+     *      description="The entered parameters are not valid.",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The input does not exist.",
+     *  ),
+     * )
+     * 
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -76,6 +217,30 @@ class InputController extends Controller
     }
 
     /**
+     * @OA\Delete(
+     *  path="/input/{id}",
+     *  summary="Delete input",
+     *  description="Delete an input.",
+     *  operationId="inputDelete",
+     *  tags={"input"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The input does not exist.",
+     *  ),
+     * )
+     * 
      * Remove the specified resource from storage.
      *
      * @param  int  $id
