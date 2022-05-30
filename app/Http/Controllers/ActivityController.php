@@ -10,6 +10,22 @@ use Illuminate\Http\Request;
 class ActivityController extends Controller
 {
     /**
+     * @OA\Get(
+     *  path="/activity",
+     *  summary="List Activities",
+     *  description="Get a list of all activities.",
+     *  operationId="activityList",
+     *  tags={"activity"},
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(
+     *          type="array",
+     *          @OA\Items(ref="#/components/schemas/Activity"),
+     *      ),
+     *  ),
+     * )
+     * 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -20,6 +36,41 @@ class ActivityController extends Controller
     }
 
     /**
+     * @OA\Post(
+     *  path="/activity",
+     *  summary="Create Activity",
+     *  description="Create a new activity.",
+     *  operationId="activityCreate",
+     *  tags={"activity"},
+     *  @OA\Parameter(
+     *      name="name",
+     *      description="The name of the activity.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="description",
+     *      description="A short description of the activity.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/Activity"),
+     *  ),
+     *  @OA\Response(
+     *      response=422,
+     *      description="The entered parameters are not valid.",
+     *  ),
+     * )
+     * 
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -41,6 +92,31 @@ class ActivityController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *  path="/activity/{id}",
+     *  summary="Show Activity",
+     *  description="Get a single activity by id.",
+     *  operationId="activityShow",
+     *  tags={"activity"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/Activity"),
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The activity does not exist.",
+     *  ),
+     * )
+     * 
      * Display the specified resource.
      *
      * @param  int  $id
@@ -52,6 +128,49 @@ class ActivityController extends Controller
     }
 
     /**
+     * @OA\Patch(
+     *  path="/activity/{id}",
+     *  summary="Update activity",
+     *  description="Update an existing activity.",
+     *  operationId="activityUpdate",
+     *  tags={"activity"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="name",
+     *      description="The name of the activity.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="description",
+     *      description="A short description of the activity.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/Activity"),
+     *  ),
+     *  @OA\Response(
+     *      response=422,
+     *      description="The entered parameters are not valid.",
+     *  ),
+     * )
+     * 
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -74,6 +193,30 @@ class ActivityController extends Controller
     }
 
     /**
+     * @OA\Delete(
+     *  path="/activity/{id}",
+     *  summary="Delete activity",
+     *  description="Delete an activity.",
+     *  operationId="activityDelete",
+     *  tags={"activity"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The activity does not exist.",
+     *  ),
+     * )
+     * 
      * Remove the specified resource from storage.
      *
      * @param  int  $id
