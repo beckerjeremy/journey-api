@@ -12,6 +12,26 @@ class StatusController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
+     * @OA\Get(
+     *  path="/status",
+     *  summary="List statuses",
+     *  description="Get a list of all statuses.",
+     *  operationId="statusList",
+     *  tags={"status"},
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(
+     *          type="array",
+     *          @OA\Items(ref="#/components/schemas/Status"),
+     *      ),
+     *  ),
+     * )
+     * 
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
