@@ -60,6 +60,7 @@ $app->singleton(
 
 $app->configure('app');
 $app->configure('jwt');
+$app->configure('swagger-lume');
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +98,7 @@ $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register(Irazasyed\Larasupport\Providers\ArtisanServiceProvider::class);
 $app->register(PHPOpenSourceSaver\JWTAuth\Providers\LumenServiceProvider::class);
+$app->register(\SwaggerLume\ServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
