@@ -11,6 +11,22 @@ use Illuminate\Http\Request;
 class TextInputController extends Controller
 {
     /**
+     * @OA\Get(
+     *  path="/text",
+     *  summary="List text inputs",
+     *  description="Get a list of all text inputs.",
+     *  operationId="textInputList",
+     *  tags={"textInput"},
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(
+     *          type="array",
+     *          @OA\Items(ref="#/components/schemas/TextInput"),
+     *      ),
+     *  ),
+     * )
+     * 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -21,6 +37,41 @@ class TextInputController extends Controller
     }
 
     /**
+     * @OA\Post(
+     *  path="/text",
+     *  summary="Create text input",
+     *  description="Create a new text input.",
+     *  operationId="textInputCreate",
+     *  tags={"textInput"},
+     *  @OA\Parameter(
+     *      name="name",
+     *      description="The name of the input.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="text",
+     *      description="The text entered by the user.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/TextInput"),
+     *  ),
+     *  @OA\Response(
+     *      response=422,
+     *      description="The entered parameters are not valid.",
+     *  ),
+     * )
+     * 
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -47,6 +98,31 @@ class TextInputController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *  path="/text/{id}",
+     *  summary="Show text input",
+     *  description="Get a single text input by id.",
+     *  operationId="textInputShow",
+     *  tags={"textInput"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/TextInput"),
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The text input does not exist.",
+     *  ),
+     * )
+     * 
      * Display the specified resource.
      *
      * @param  int  $id
@@ -58,6 +134,44 @@ class TextInputController extends Controller
     }
 
     /**
+     * @OA\Patch(
+     *  path="/text/{id}",
+     *  summary="Update text input",
+     *  description="Update an existing text input.",
+     *  operationId="textInputUpdate",
+     *  tags={"textInput"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="text",
+     *      description="The text entered by the user.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/TextInput"),
+     *  ),
+     *  @OA\Response(
+     *      response=422,
+     *      description="The entered parameters are not valid.",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The text input does not exist.",
+     *  ),
+     * )
+     * 
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -78,6 +192,30 @@ class TextInputController extends Controller
     }
 
     /**
+     * @OA\Delete(
+     *  path="/text/{id}",
+     *  summary="Delete text input",
+     *  description="Delete a text input.",
+     *  operationId="textInputDelete",
+     *  tags={"textInput"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The text input does not exist.",
+     *  ),
+     * )
+     * 
      * Remove the specified resource from storage.
      *
      * @param  int  $id

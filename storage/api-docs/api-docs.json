@@ -1672,6 +1672,180 @@
                     }
                 }
             }
+        },
+        "/text": {
+            "get": {
+                "tags": [
+                    "textInput"
+                ],
+                "summary": "List text inputs",
+                "description": "Get a list of all text inputs.",
+                "operationId": "textInputList",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/TextInput"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "textInput"
+                ],
+                "summary": "Create text input",
+                "description": "Create a new text input.",
+                "operationId": "textInputCreate",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "The name of the input.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "text",
+                        "in": "query",
+                        "description": "The text entered by the user.",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TextInput"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The entered parameters are not valid."
+                    }
+                }
+            }
+        },
+        "/text/{id}": {
+            "get": {
+                "tags": [
+                    "textInput"
+                ],
+                "summary": "Show text input",
+                "description": "Get a single text input by id.",
+                "operationId": "textInputShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TextInput"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The text input does not exist."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "textInput"
+                ],
+                "summary": "Delete text input",
+                "description": "Delete a text input.",
+                "operationId": "textInputDelete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "The text input does not exist."
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "textInput"
+                ],
+                "summary": "Update text input",
+                "description": "Update an existing text input.",
+                "operationId": "textInputUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "text",
+                        "in": "query",
+                        "description": "The text entered by the user.",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TextInput"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The entered parameters are not valid."
+                    },
+                    "404": {
+                        "description": "The text input does not exist."
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -1755,6 +1929,11 @@
                     "name"
                 ],
                 "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
                     "name": {
                         "type": "string",
                         "example": "Take Photo"
@@ -1858,7 +2037,8 @@
             },
             "JourneyAction": {
                 "required": [
-                    "name",
+                    "journey_activity",
+                    "action",
                     "status"
                 ],
                 "properties": {
@@ -1899,7 +2079,8 @@
             },
             "JourneyActivity": {
                 "required": [
-                    "name",
+                    "journey",
+                    "activity",
                     "status"
                 ],
                 "properties": {
@@ -1953,6 +2134,31 @@
                 "type": "object",
                 "xml": {
                     "name": "Status"
+                }
+            },
+            "TextInput": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "text": {
+                        "type": "string",
+                        "example": "Take Photo"
+                    },
+                    "created_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    },
+                    "updated_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "TextInput"
                 }
             },
             "User": {

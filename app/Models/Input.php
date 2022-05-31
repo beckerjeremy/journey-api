@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * @OA\Schema(
  *  required={"name"},
  *  @OA\Xml(name="Input"),
+ *  @OA\Property(property="id", type="integer", readOnly="true", example="1"),
  *  @OA\Property(property="name", type="string", example="Take Photo"),
  *  @OA\Property(property="data_type_id", type="integer", example="1"),
  *  @OA\Property(property="data_type_type", type="string", example="App\\Models\\ImageInput"),

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @OA\Schema(
- *  required={"name", "status"},
+ *  required={"journey", "activity", "status"},
  *  @OA\Xml(name="JourneyActivity"),
  *  @OA\Property(property="id", type="integer", readOnly="true", example="1"),
  *  @OA\Property(property="journey", ref="#/components/schemas/Journey"),
