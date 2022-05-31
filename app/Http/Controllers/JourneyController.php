@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\JourneyBasicResource;
 use App\Http\Resources\JourneyResource;
+use App\Http\Resources\JourneySummaryResource;
 use App\Models\Journey;
 use Illuminate\Http\Request;
 
@@ -146,7 +147,7 @@ class JourneyController extends Controller
      */
     public function show($id)
     {
-        return new JourneyResource(Journey::findOrFail($id));
+        return new JourneySummaryResource(Journey::findOrFail($id));
     }
 
     /**
