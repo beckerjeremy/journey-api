@@ -11,6 +11,22 @@ use Illuminate\Http\Request;
 class VideoInputController extends Controller
 {
     /**
+     * @OA\Get(
+     *  path="/video",
+     *  summary="List videos",
+     *  description="Get a list of all video inputs.",
+     *  operationId="videoInputList",
+     *  tags={"videoInput"},
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(
+     *          type="array",
+     *          @OA\Items(ref="#/components/schemas/VideoInput"),
+     *      ),
+     *  ),
+     * )
+     * 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -21,6 +37,41 @@ class VideoInputController extends Controller
     }
 
     /**
+     * @OA\Post(
+     *  path="/video",
+     *  summary="Create video",
+     *  description="Create a new video input.",
+     *  operationId="videoInputCreate",
+     *  tags={"videoInput"},
+     *  @OA\Parameter(
+     *      name="name",
+     *      description="The name of the input.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="video",
+     *      description="The video file.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="file",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/VideoInput"),
+     *  ),
+     *  @OA\Response(
+     *      response=422,
+     *      description="The entered parameters are not valid.",
+     *  ),
+     * )
+     * 
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -57,6 +108,31 @@ class VideoInputController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *  path="/video/{id}",
+     *  summary="Show video",
+     *  description="Get a single video input by id.",
+     *  operationId="videoInputShow",
+     *  tags={"videoInput"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/VideoInput"),
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The video input does not exist.",
+     *  ),
+     * )
+     * 
      * Display the specified resource.
      *
      * @param  int  $id
@@ -68,6 +144,44 @@ class VideoInputController extends Controller
     }
 
     /**
+     * @OA\Patch(
+     *  path="/video/{id}",
+     *  summary="Update video",
+     *  description="Update an existing video input.",
+     *  operationId="videoInputUpdate",
+     *  tags={"videoInput"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="video",
+     *      description="The video file.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="file",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/VideoInput"),
+     *  ),
+     *  @OA\Response(
+     *      response=422,
+     *      description="The entered parameters are not valid.",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The video input does not exist.",
+     *  ),
+     * )
+     * 
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -99,6 +213,30 @@ class VideoInputController extends Controller
     }
 
     /**
+     * @OA\Delete(
+     *  path="/video/{id}",
+     *  summary="Delete video",
+     *  description="Delete a video input.",
+     *  operationId="videoInputDelete",
+     *  tags={"videoInput"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The video input does not exist.",
+     *  ),
+     * )
+     * 
      * Remove the specified resource from storage.
      *
      * @param  int  $id

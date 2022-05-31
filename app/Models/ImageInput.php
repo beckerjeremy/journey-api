@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @OA\Schema(
  *  required={"name"},
- *  @OA\Xml(name="Input"),
+ *  @OA\Xml(name="ImageInput"),
  *  @OA\Property(property="id", type="integer", readOnly="true", example="1"),
  *  @OA\Property(property="file_url", type="string", example="http://targeturl.com/uploads/images/name.png"),
  *  @OA\Property(property="type", type="string", example="png"),

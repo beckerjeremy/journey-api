@@ -2020,6 +2020,180 @@
                     }
                 }
             }
+        },
+        "/video": {
+            "get": {
+                "tags": [
+                    "videoInput"
+                ],
+                "summary": "List videos",
+                "description": "Get a list of all video inputs.",
+                "operationId": "videoInputList",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/VideoInput"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "videoInput"
+                ],
+                "summary": "Create video",
+                "description": "Create a new video input.",
+                "operationId": "videoInputCreate",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "The name of the input.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "video",
+                        "in": "query",
+                        "description": "The video file.",
+                        "required": true,
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VideoInput"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The entered parameters are not valid."
+                    }
+                }
+            }
+        },
+        "/video/{id}": {
+            "get": {
+                "tags": [
+                    "videoInput"
+                ],
+                "summary": "Show video",
+                "description": "Get a single video input by id.",
+                "operationId": "videoInputShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VideoInput"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The video input does not exist."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "videoInput"
+                ],
+                "summary": "Delete video",
+                "description": "Delete a video input.",
+                "operationId": "videoInputDelete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "The video input does not exist."
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "videoInput"
+                ],
+                "summary": "Update video",
+                "description": "Update an existing video input.",
+                "operationId": "videoInputUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "video",
+                        "in": "query",
+                        "description": "The video file.",
+                        "required": true,
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VideoInput"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The entered parameters are not valid."
+                    },
+                    "404": {
+                        "description": "The video input does not exist."
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -2131,7 +2305,7 @@
                 },
                 "type": "object",
                 "xml": {
-                    "name": "Input"
+                    "name": "ImageInput"
                 }
             },
             "Input": {
@@ -2419,6 +2593,46 @@
                 "type": "object",
                 "xml": {
                     "name": "User"
+                }
+            },
+            "VideoInput": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "file_url": {
+                        "type": "string",
+                        "example": "http://targeturl.com/uploads/videos/name.png"
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "mp4"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "example": "29480381"
+                    },
+                    "duration": {
+                        "type": "integer",
+                        "example": "10"
+                    },
+                    "created_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    },
+                    "updated_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "VideoInput"
                 }
             }
         },
