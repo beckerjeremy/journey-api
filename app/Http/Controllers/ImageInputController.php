@@ -11,6 +11,22 @@ use Illuminate\Http\Request;
 class ImageInputController extends Controller
 {
     /**
+     * @OA\Get(
+     *  path="/image",
+     *  summary="List images",
+     *  description="Get a list of all image inputs.",
+     *  operationId="imageInputList",
+     *  tags={"imageInput"},
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(
+     *          type="array",
+     *          @OA\Items(ref="#/components/schemas/ImageInput"),
+     *      ),
+     *  ),
+     * )
+     * 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -21,6 +37,41 @@ class ImageInputController extends Controller
     }
 
     /**
+     * @OA\Post(
+     *  path="/image",
+     *  summary="Create image",
+     *  description="Create a new image input.",
+     *  operationId="imageInputCreate",
+     *  tags={"imageInput"},
+     *  @OA\Parameter(
+     *      name="name",
+     *      description="The name of the input.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="image",
+     *      description="The image file.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="file",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/ImageInput"),
+     *  ),
+     *  @OA\Response(
+     *      response=422,
+     *      description="The entered parameters are not valid.",
+     *  ),
+     * )
+     * 
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -57,6 +108,31 @@ class ImageInputController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *  path="/image/{id}",
+     *  summary="Show image",
+     *  description="Get a single image input by id.",
+     *  operationId="imageInputShow",
+     *  tags={"imageInput"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/ImageInput"),
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The image input does not exist.",
+     *  ),
+     * )
+     * 
      * Display the specified resource.
      *
      * @param  int  $id
@@ -68,6 +144,44 @@ class ImageInputController extends Controller
     }
 
     /**
+     * @OA\Patch(
+     *  path="/image/{id}",
+     *  summary="Update image",
+     *  description="Update an existing image input.",
+     *  operationId="imageInputUpdate",
+     *  tags={"imageInput"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="image",
+     *      description="The image file.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="file",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/ImageInput"),
+     *  ),
+     *  @OA\Response(
+     *      response=422,
+     *      description="The entered parameters are not valid.",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The image input does not exist.",
+     *  ),
+     * )
+     * 
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -98,6 +212,30 @@ class ImageInputController extends Controller
     }
 
     /**
+     * @OA\Delete(
+     *  path="/image/{id}",
+     *  summary="Delete image",
+     *  description="Delete an image input.",
+     *  operationId="imageInputDelete",
+     *  tags={"imageInput"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(
+     *          type="integer",
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="The image input does not exist.",
+     *  ),
+     * )
+     * 
      * Remove the specified resource from storage.
      *
      * @param  int  $id

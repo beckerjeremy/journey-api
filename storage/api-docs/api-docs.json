@@ -577,6 +577,180 @@
                 ]
             }
         },
+        "/image": {
+            "get": {
+                "tags": [
+                    "imageInput"
+                ],
+                "summary": "List images",
+                "description": "Get a list of all image inputs.",
+                "operationId": "imageInputList",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ImageInput"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "imageInput"
+                ],
+                "summary": "Create image",
+                "description": "Create a new image input.",
+                "operationId": "imageInputCreate",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "The name of the input.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "image",
+                        "in": "query",
+                        "description": "The image file.",
+                        "required": true,
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ImageInput"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The entered parameters are not valid."
+                    }
+                }
+            }
+        },
+        "/image/{id}": {
+            "get": {
+                "tags": [
+                    "imageInput"
+                ],
+                "summary": "Show image",
+                "description": "Get a single image input by id.",
+                "operationId": "imageInputShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ImageInput"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The image input does not exist."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "imageInput"
+                ],
+                "summary": "Delete image",
+                "description": "Delete an image input.",
+                "operationId": "imageInputDelete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "The image input does not exist."
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "imageInput"
+                ],
+                "summary": "Update image",
+                "description": "Update an existing image input.",
+                "operationId": "imageInputUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "image",
+                        "in": "query",
+                        "description": "The image file.",
+                        "required": true,
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ImageInput"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The entered parameters are not valid."
+                    },
+                    "404": {
+                        "description": "The image input does not exist."
+                    }
+                }
+            }
+        },
         "/input": {
             "get": {
                 "tags": [
@@ -1922,6 +2096,42 @@
                 "type": "object",
                 "xml": {
                     "name": "Activity"
+                }
+            },
+            "ImageInput": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "file_url": {
+                        "type": "string",
+                        "example": "http://targeturl.com/uploads/images/name.png"
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "png"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "example": "3453979"
+                    },
+                    "created_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    },
+                    "updated_at": {
+                        "type": "date",
+                        "example": "2022-05-25 22:15:23"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Input"
                 }
             },
             "Input": {
