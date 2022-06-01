@@ -17,7 +17,7 @@ class InputResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'data_type' => $this->data_type,
+            'input_type' => $this->input_type,
         ];
     }
 }

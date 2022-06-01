@@ -17,8 +17,8 @@ class InputBasicResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'data_type_id' => $this->data_type_id,
-            'data_type_type' => $this->data_type_type,
+            'input_type_id' => $this->input_type_id,
+            'input_type_type' => $this->input_type_type,
         ];
     }
 }

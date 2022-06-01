@@ -33,6 +33,6 @@ class ImageInput extends Model
      * @return Input
      */
     public function input() {
-        return $this->morphOne(Input::class, 'data_type');
+        return $this->morphOne(Input::class, 'input_type');
     }
 }

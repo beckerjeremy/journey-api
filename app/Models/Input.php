@@ -41,7 +41,7 @@ class Input extends Model
      * 
      * @return Object
      */
-    public function data_type() {
+    public function input_type() {
         return $this->morphTo();
     }
 }

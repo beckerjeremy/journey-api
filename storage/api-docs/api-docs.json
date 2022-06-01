@@ -793,7 +793,7 @@
                         }
                     },
                     {
-                        "name": "data_type_id",
+                        "name": "input_type_id",
                         "in": "query",
                         "description": "The id of the specialized object.",
                         "required": true,
@@ -802,7 +802,7 @@
                         }
                     },
                     {
-                        "name": "data_type_type",
+                        "name": "input_type_type",
                         "in": "query",
                         "description": "The class name of the specialized object.",
                         "required": true,
@@ -914,7 +914,7 @@
                         }
                     },
                     {
-                        "name": "data_type_id",
+                        "name": "input_type_id",
                         "in": "query",
                         "description": "The id of the specialized object.",
                         "required": false,
@@ -923,7 +923,7 @@
                         }
                     },
                     {
-                        "name": "data_type_type",
+                        "name": "input_type_type",
                         "in": "query",
                         "description": "The class name of the specialized object.",
                         "required": false,
