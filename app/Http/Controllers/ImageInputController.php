@@ -7,6 +7,7 @@ use App\Http\Resources\ImageInputResource;
 use App\Models\ImageInput;
 use App\Models\Input;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ImageInputController extends Controller
 {
@@ -85,17 +86,18 @@ class ImageInputController extends Controller
         ]);
 
         $image = $request->file('image');
+        $image_size = $request->file('image')->getSize();
         $image_path = 'uploads' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR;
         $image_extension = $image->extension();
-        $image_name = uniqid() . $image_extension;
+        $image_name = uniqid() . '.' . $image_extension;
         $destination = public_path($image_path);
         File::makeDirectory($destination, 0777, true, true);
         $request->file('image')->move($destination, $image_name);
 
         $imageInput = new ImageInput;
-        $imageInput->file_url = 'public\/' . $image_path . '\/' .$image_name;
+        $imageInput->file_url = $image_path . '/' .$image_name;
         $imageInput->type = $image_extension;
-        $imageInput->size = $image->getSize();
+        $imageInput->size = $image_size;
         $imageInput->save();
 
         $input = new Input;
@@ -195,17 +197,18 @@ class ImageInputController extends Controller
         ]);
 
         $image = $request->file('image');
+        $image_size = $request->file('image')->getSize();
         $image_path = 'uploads' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR;
         $image_extension = $image->extension();
-        $image_name = uniqid() . $image_extension;
+        $image_name = uniqid() . '.' . $image_extension;
         $destination = public_path($image_path);
         File::makeDirectory($destination, 0777, true, true);
         $request->file('image')->move($destination, $image_name);
 
-        $imageInput = new ImageInput;
-        $imageInput->file_url = 'public\/' . $image_path . '\/' .$image_name;
+        $imageInput = ImageInput::findOrFail($id);
+        $imageInput->file_url = $image_path . '/' .$image_name;
         $imageInput->type = $image_extension;
-        $imageInput->size = $image->getSize();
+        $imageInput->size = $image_size;
         $imageInput->save();
 
         return new ImageInputResource($imageInput);

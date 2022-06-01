@@ -7,6 +7,7 @@ use App\Http\Resources\VideoInputResource;
 use App\Models\Input;
 use App\Models\VideoInput;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class VideoInputController extends Controller
 {
@@ -85,17 +86,18 @@ class VideoInputController extends Controller
         ]);
 
         $video = $request->file('video');
+        $video_size = $request->file('video')->getSize();
         $video_path = 'uploads' . DIRECTORY_SEPARATOR . 'videos' . DIRECTORY_SEPARATOR;
         $video_extension = $video->extension();
-        $video_name = uniqid() . $video_extension;
+        $video_name = uniqid() . '.' . $video_extension;
         $destination = public_path($video_path);
         File::makeDirectory($destination, 0777, true, true);
         $request->file('video')->move($destination, $video_name);
 
         $videoInput = new VideoInput;
-        $videoInput->file_url = 'public\/' . $video_path . '\/' .$video_name;
+        $videoInput->file_url = $video_path . '/' .$video_name;
         $videoInput->type = $video_extension;
-        $videoInput->size = $video->getSize();
+        $videoInput->size = $video_size;
         $videoInput->save();
 
         $input = new Input;
@@ -196,17 +198,18 @@ class VideoInputController extends Controller
         ]);
 
         $video = $request->file('video');
+        $video_size = $request->file('video')->getSize();
         $video_path = 'uploads' . DIRECTORY_SEPARATOR . 'videos' . DIRECTORY_SEPARATOR;
         $video_extension = $video->extension();
-        $video_name = uniqid() . $video_extension;
+        $video_name = uniqid() . '.' . $video_extension;
         $destination = public_path($video_path);
         File::makeDirectory($destination, 0777, true, true);
         $request->file('video')->move($destination, $video_name);
 
-        $videoInput = new VideoInput;
-        $videoInput->file_url = 'public\/' . $video_path . '\/' .$video_name;
+        $videoInput = VideoInput::findOrFail($id);
+        $videoInput->file_url = $video_path . '/' .$video_name;
         $videoInput->type = $video_extension;
-        $videoInput->size = $video->getSize();
+        $videoInput->size = $video_size;
         $videoInput->save();
 
         return new VideoInputResource($videoInput);
