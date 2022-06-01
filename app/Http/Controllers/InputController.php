@@ -52,7 +52,7 @@ class InputController extends Controller
      *      ),
      *  ),
      *  @OA\Parameter(
-     *      name="data_type_id",
+     *      name="input_type_id",
      *      description="The id of the specialized object.",
      *      required=true,
      *      in="query",
@@ -61,7 +61,7 @@ class InputController extends Controller
      *      ),
      *  ),
      *  @OA\Parameter(
-     *      name="data_type_type",
+     *      name="input_type_type",
      *      description="The class name of the specialized object.",
      *      required=true,
      *      in="query",
@@ -89,13 +89,13 @@ class InputController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string|min:1',
-            'data_type_id' => 'required|poly_exists:data_type_type',
+            'input_type_id' => 'required|poly_exists:input_type_type',
         ]);
 
         $input = new Input;
         $input->name = $request->name;
-        $input->data_type_id = $request->data_type_id;
-        $input->data_type_type = $request->data_type_type;
+        $input->input_type_id = $request->input_type_id;
+        $input->input_type_type = $request->input_type_type;
         $input->save();
 
         return new InputResource($input);
@@ -162,7 +162,7 @@ class InputController extends Controller
      *      ),
      *  ),
      *  @OA\Parameter(
-     *      name="data_type_id",
+     *      name="input_type_id",
      *      description="The id of the specialized object.",
      *      required=false,
      *      in="query",
@@ -171,7 +171,7 @@ class InputController extends Controller
      *      ),
      *  ),
      *  @OA\Parameter(
-     *      name="data_type_type",
+     *      name="input_type_type",
      *      description="The class name of the specialized object.",
      *      required=false,
      *      in="query",
@@ -204,13 +204,13 @@ class InputController extends Controller
     {
         $this->validate($request, [
             'name' => 'string|min:1',
-            'data_type_id' => 'poly_exists:data_type_type',
+            'input_type_id' => 'poly_exists:input_type_type',
         ]);
 
         $input = Input::findOrFail($id);
         if (isset($request->name)) $input->name = $request->name;
-        if (isset($request->data_type_id)) $input->data_type_id = $request->data_type_id;
-        if (isset($request->data_type_type)) $input->data_type_type = $request->data_type_type;
+        if (isset($request->input_type_id)) $input->input_type_id = $request->input_type_id;
+        if (isset($request->input_type_type)) $input->input_type_type = $request->input_type_type;
         $input->save();
 
         return new InputResource($input);

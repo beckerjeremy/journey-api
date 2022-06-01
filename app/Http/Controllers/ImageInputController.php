@@ -100,8 +100,8 @@ class ImageInputController extends Controller
 
         $input = new Input;
         $input->name = $request->name;
-        $input->data_type_id = $imageInput->id;
-        $input->data_type_type = "App\\Models\\ImageInput";
+        $input->input_type_id = $imageInput->id;
+        $input->input_type_type = "App\\Models\\ImageInput";
         $input->save();
 
         return new ImageInputResource($imageInput);

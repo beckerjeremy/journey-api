@@ -90,8 +90,8 @@ class TextInputController extends Controller
 
         $input = new Input;
         $input->name = $request->name;
-        $input->data_type_id = $textInput->id;
-        $input->data_type_type = "App\\Models\\TextInput";
+        $input->input_type_id = $textInput->id;
+        $input->input_type_type = "App\\Models\\TextInput";
         $input->save();
 
         return new TextInputResource($textInput);

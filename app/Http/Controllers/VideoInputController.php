@@ -100,8 +100,8 @@ class VideoInputController extends Controller
 
         $input = new Input;
         $input->name = $request->name;
-        $input->data_type_id = $videoInput->id;
-        $input->data_type_type = "App\\Models\\VideoInput";
+        $input->input_type_id = $videoInput->id;
+        $input->input_type_type = "App\\Models\\VideoInput";
         $input->save();
 
         return new VideoInputResource($videoInput);
