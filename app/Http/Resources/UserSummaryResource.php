@@ -2,9 +2,11 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\JourneySummaryResource;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
-class UserResource extends JsonResource
+class UserSummaryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,6 +24,7 @@ class UserResource extends JsonResource
             'language' => $this->language,
             'is_admin' => $this->is_admin,
             'token' => $this->token,
+            'journeys' => JourneySummaryResource::collection($this->journeys),
         ];
     }
 }

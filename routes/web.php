@@ -35,6 +35,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->patch('/user/{id}', 'UserController@update');
     $router->delete('/user/{id}', 'UserController@destroy');
 
+    $router->post('/token', 'TokenController@store');
+    $router->get('/token/{token}', 'TokenController@show');
+
     $router->get('/activity', 'ActivityController@index');
     $router->post('/activity', 'ActivityController@store');
     $router->get('/activity/{id}', 'ActivityController@show');

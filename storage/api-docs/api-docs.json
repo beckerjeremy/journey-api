@@ -2021,6 +2021,77 @@
                 }
             }
         },
+        "/token": {
+            "post": {
+                "tags": [
+                    "token"
+                ],
+                "summary": "Create user with token",
+                "description": "Create a new user with token.",
+                "operationId": "tokenCreate",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "The token the user gets.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "The entered parameters are not valid."
+                    }
+                }
+            }
+        },
+        "/token/{token}": {
+            "get": {
+                "tags": [
+                    "token"
+                ],
+                "summary": "Show user with token",
+                "description": "Get a single user by token.",
+                "operationId": "tokenShow",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The user does not exist."
+                    }
+                }
+            }
+        },
         "/video": {
             "get": {
                 "tags": [
@@ -2580,6 +2651,10 @@
                     "is_admin": {
                         "type": "boolean",
                         "example": "true"
+                    },
+                    "token": {
+                        "type": "string",
+                        "example": "d8fah"
                     },
                     "created_at": {
                         "type": "date",

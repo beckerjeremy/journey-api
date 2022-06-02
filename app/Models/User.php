@@ -21,6 +21,7 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
  *  @OA\Property(property="password", type="string"),
  *  @OA\Property(property="language", type="string", example="de"),
  *  @OA\Property(property="is_admin", type="boolean", example="true"),
+ *  @OA\Property(property="token", type="string", example="d8fah"),
  *  @OA\Property(property="created_at", type="date", example="2022-05-25 22:15:23"),
  *  @OA\Property(property="updated_at", type="date", example="2022-05-25 22:15:23"),
  * )
@@ -46,6 +47,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    /**
+     * Return the journeys the user has made.
+     * 
+     * @return Journey[]
+     */
+    public function journeys() {
+        return $this->hasMany(Journey::class);
+    }
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
