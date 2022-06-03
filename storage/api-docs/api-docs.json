@@ -2161,6 +2161,15 @@
                         }
                     },
                     {
+                        "name": "password_confirmation",
+                        "in": "query",
+                        "description": "The confirmed password of the user to log in.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "language",
                         "in": "query",
                         "description": "The preferred language of the user.",
@@ -2312,6 +2321,15 @@
                         "name": "password",
                         "in": "query",
                         "description": "The password of the user to log in.",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "in": "query",
+                        "description": "The confirmed password of the user to log in.",
                         "required": false,
                         "schema": {
                             "type": "string"

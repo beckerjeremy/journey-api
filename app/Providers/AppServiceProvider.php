@@ -24,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (env('APP_ENV') === 'production') {
+            $this->app['request']->server->set('HTTPS', true);
+        }
+
         Validator::extend('poly_exists', function ($attribute, $value, $parameters, $validator) {
             if (!$objectType = array_get($validator->getData(), $parameters[0], false)) {
                 return false;
@@ -31,5 +35,10 @@ class AppServiceProvider extends ServiceProvider
         
             return !empty(resolve($objectType)->find($value));
         });
+
+        $request = app('request');
+        if ($request->isMethod('OPTIONS')) {
+            app()->options($request->path(), function() { return response('', 200); });
+        }
     }
 }

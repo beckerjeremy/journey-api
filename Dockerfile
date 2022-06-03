@@ -27,5 +27,5 @@ RUN chmod -R 777 /var/www/html &&\
 
 # Install app
 RUN composer update && composer install
-COPY .env.example .env
+COPY .env.production .env
 EXPOSE 8000

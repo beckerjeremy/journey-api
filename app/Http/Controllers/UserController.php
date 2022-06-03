@@ -79,6 +79,15 @@ class UserController extends Controller
      *      ),
      *  ),
      *  @OA\Parameter(
+     *      name="password_confirmation",
+     *      description="The confirmed password of the user to log in.",
+     *      required=true,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
      *      name="language",
      *      description="The preferred language of the user.",
      *      required=false,
@@ -227,6 +236,15 @@ class UserController extends Controller
      *  @OA\Parameter(
      *      name="password",
      *      description="The password of the user to log in.",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *          type="string",
+     *      ),
+     *  ),
+     *  @OA\Parameter(
+     *      name="password_confirmation",
+     *      description="The confirmed password of the user to log in.",
      *      required=false,
      *      in="query",
      *      @OA\Schema(
