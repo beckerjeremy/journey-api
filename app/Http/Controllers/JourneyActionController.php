@@ -335,7 +335,7 @@ class JourneyActionController extends Controller
             if (isset($request->action_id)) $journeyAction->action_id = $request->action_id;
             if (isset($request->started_at)) $journeyAction->started_at = $request->started_at;
             if (isset($request->status_id)) $journeyAction->status_id = $request->status_id;
-            if (isset($request->input_id)) $journeyAction->input_it = $request->input_id;
+            if (isset($request->input_id)) $journeyAction->input_id = $request->input_id;
             $journeyAction->save();
             
             return new JourneyActionResource($journeyAction);
