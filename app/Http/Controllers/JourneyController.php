@@ -227,7 +227,7 @@ class JourneyController extends Controller
         $this->validate($request, [
             'name' => 'string|min:1',
             'started_at' => 'date',
-            'status_id' => 'required|exists:status,id',
+            'status_id' => 'exists:status,id',
             'user_id' => 'exists:users,id',
         ]);
 
