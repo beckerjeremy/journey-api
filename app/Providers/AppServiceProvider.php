@@ -35,10 +35,5 @@ class AppServiceProvider extends ServiceProvider
         
             return !empty(resolve($objectType)->find($value));
         });
-
-        $request = app('request');
-        if ($request->isMethod('OPTIONS')) {
-            app()->options($request->path(), function() { return response('', 200); });
-        }
     }
 }
