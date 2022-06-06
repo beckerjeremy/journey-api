@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('journey_id');
             $table->unsignedBigInteger('activity_id');
-            $table->timestamp('started_at');
+            $table->timestamp('started_at')->nullable();
             $table->unsignedBigInteger('status_id');
             $table->timestamps();
 

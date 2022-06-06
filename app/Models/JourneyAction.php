@@ -44,7 +44,7 @@ class JourneyAction extends Model
      * @return Action
      */
     public function action() {
-        return $this->belongsTo(Actions::class);
+        return $this->belongsTo(Action::class);
     }
 
     /**

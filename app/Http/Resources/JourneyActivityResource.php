@@ -8,7 +8,7 @@ use App\Http\Resources\JourneyBasicResource;
 use App\Http\Resources\StatusResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class JourneyActivitycResource extends JsonResource
+class JourneyActivityResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
