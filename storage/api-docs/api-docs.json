@@ -101,8 +101,8 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
+                    "201": {
+                        "description": "Created",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -329,8 +329,8 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
+                    "201": {
+                        "description": "Created",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -629,8 +629,8 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
+                    "201": {
+                        "description": "Created",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -812,8 +812,8 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
+                    "201": {
+                        "description": "Created",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1119,8 +1119,8 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
+                    "201": {
+                        "description": "Created",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1401,8 +1401,8 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
+                    "201": {
+                        "description": "Created",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1638,8 +1638,8 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
+                    "201": {
+                        "description": "Created",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1899,8 +1899,8 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
+                    "201": {
+                        "description": "Created",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2041,8 +2041,8 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
+                    "201": {
+                        "description": "Created",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2198,8 +2198,8 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
+                    "201": {
+                        "description": "Created",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2435,8 +2435,8 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
+                    "201": {
+                        "description": "Created",
                         "content": {
                             "application/json": {
                                 "schema": {

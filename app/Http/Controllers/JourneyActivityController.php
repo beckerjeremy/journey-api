@@ -92,8 +92,8 @@ class JourneyActivityController extends Controller
      *      ),
      *  ),
      *  @OA\Response(
-     *      response=200,
-     *      description="Success",
+     *      response=201,
+     *      description="Created",
      *      @OA\JsonContent(ref="#/components/schemas/JourneyActivity"),
      *  ),
      *  @OA\Response(
