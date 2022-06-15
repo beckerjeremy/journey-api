@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use App\Http\Resources\InputBasicResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class VideoInputResoure extends JsonResource
+class VideoInputResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
