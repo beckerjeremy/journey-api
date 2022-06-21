@@ -8,6 +8,7 @@ use App\Models\ImageInput;
 use App\Models\Input;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 
 class ImageInputController extends Controller
 {
@@ -89,13 +90,22 @@ class ImageInputController extends Controller
         $image_size = $request->file('image')->getSize();
         $image_path = 'uploads' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR;
         $image_extension = $image->extension();
-        $image_name = uniqid() . '.' . $image_extension;
+        $image_unique = uniqid();
+        $image_name = $image_unique . '.' . $image_extension;
         $destination = public_path($image_path);
         File::makeDirectory($destination, 0777, true, true);
+
+        $thumbnail_name = $image_unique . '_thumbnail.' . $image_extension;
+        $img = Image::make($image->path());
+        $img->resize(200, 200, function ($const) {
+            $const->aspectRatio();
+        })->save($destination . $thumbnail_name);
+
         $request->file('image')->move($destination, $image_name);
 
         $imageInput = new ImageInput;
-        $imageInput->file_url = $image_path . '/' .$image_name;
+        $imageInput->file_url = $image_path . $image_name;
+        $imageInput->thumbnail_url = $image_path . $thumbnail_name;
         $imageInput->type = $image_extension;
         $imageInput->size = $image_size;
         $imageInput->save();
@@ -200,13 +210,22 @@ class ImageInputController extends Controller
         $image_size = $request->file('image')->getSize();
         $image_path = 'uploads' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR;
         $image_extension = $image->extension();
-        $image_name = uniqid() . '.' . $image_extension;
+        $image_unique = uniqid();
+        $image_name = $image_unique . '.' . $image_extension;
         $destination = public_path($image_path);
         File::makeDirectory($destination, 0777, true, true);
+
+        $thumbnail_name = $image_unique . '_thumbnail.' . $image_extension;
+        $img = Image::make($image->path());
+        $img->resize(200, 200, function ($const) {
+            $const->aspectRatio();
+        })->save($destination . $thumbnail_name);
+
         $request->file('image')->move($destination, $image_name);
 
         $imageInput = ImageInput::findOrFail($id);
-        $imageInput->file_url = $image_path . '/' .$image_name;
+        $imageInput->file_url = $image_path . $image_name;
+        $imageInput->thumbnail_url = $image_path . $thumbnail_name;
         $imageInput->type = $image_extension;
         $imageInput->size = $image_size;
         $imageInput->save();

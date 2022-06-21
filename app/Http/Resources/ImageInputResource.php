@@ -19,6 +19,7 @@ class ImageInputResource extends JsonResource
             'id' => $this->id,
             'input' => new InputBasicResource($this->input),
             'file_url' => $this->file_url,
+            'thumbnail_url' => $this->thumbnail_url,
             'type' => $this->type,
             'size' => $this->size,
         ];
