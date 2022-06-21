@@ -8,6 +8,9 @@ use App\Models\Input;
 use App\Models\VideoInput;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
+use FFMpeg\FFMpeg;
+use FFMpeg\Coordinate\TimeCode;
 
 class VideoInputController extends Controller
 {
@@ -89,13 +92,26 @@ class VideoInputController extends Controller
         $video_size = $request->file('video')->getSize();
         $video_path = 'uploads' . DIRECTORY_SEPARATOR . 'videos' . DIRECTORY_SEPARATOR;
         $video_extension = $video->extension();
-        $video_name = uniqid() . '.' . $video_extension;
+        $video_unique = uniqid();
+        $video_name = $video_unique . '.' . $video_extension;
         $destination = public_path($video_path);
         File::makeDirectory($destination, 0777, true, true);
+
+        $ffmpeg = FFMpeg::create();
+        $video = $ffmpeg->open($video->path());
+        $frame_name = $video_unique . '_thumbnail.jpg';
+        $frame = $video->frame(TimeCode::fromSeconds(1));
+        $frame->save($destination . $frame_name);
+        $img = Image::make($destination . $frame_name);
+        $img->resize(200, 200, function ($const) {
+            $const->aspectRatio();
+        })->save($destination . $frame_name);
+
         $request->file('video')->move($destination, $video_name);
 
         $videoInput = new VideoInput;
-        $videoInput->file_url = $video_path . '/' .$video_name;
+        $videoInput->file_url = $video_path . $video_name;
+        $videoInput->thumbnail_url = $video_path . $frame_name;
         $videoInput->type = $video_extension;
         $videoInput->size = $video_size;
         $videoInput->save();
@@ -201,13 +217,26 @@ class VideoInputController extends Controller
         $video_size = $request->file('video')->getSize();
         $video_path = 'uploads' . DIRECTORY_SEPARATOR . 'videos' . DIRECTORY_SEPARATOR;
         $video_extension = $video->extension();
-        $video_name = uniqid() . '.' . $video_extension;
+        $video_unique = uniqid();
+        $video_name = $video_unique . '.' . $video_extension;
         $destination = public_path($video_path);
         File::makeDirectory($destination, 0777, true, true);
+
+        $ffmpeg = FFMpeg::create();
+        $video = $ffmpeg->open($video->path());
+        $frame_name = $video_unique . '_thumbnail.jpg';
+        $frame = $video->frame(TimeCode::fromSeconds(1));
+        $frame->save($destination . $frame_name);
+        $img = Image::make($destination . $frame_name);
+        $img->resize(200, 200, function ($const) {
+            $const->aspectRatio();
+        })->save($destination . $frame_name);
+
         $request->file('video')->move($destination, $video_name);
 
         $videoInput = VideoInput::findOrFail($id);
-        $videoInput->file_url = $video_path . '/' .$video_name;
+        $videoInput->file_url = $video_path . $video_name;
+        $videoInput->thumbnail_url = $video_path . $frame_name;
         $videoInput->type = $video_extension;
         $videoInput->size = $video_size;
         $videoInput->save();

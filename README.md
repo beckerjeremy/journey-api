@@ -13,3 +13,7 @@ $ php artisan migrate:fresh --seed
 # run the server
 $ php artisan serve
 ```
+
+## Prerequisites
+
+To generate the thumbnails for the videos ffmpeg is required and needs to be installed on the machine.

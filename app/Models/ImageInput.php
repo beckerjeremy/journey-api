@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *  @OA\Xml(name="ImageInput"),
  *  @OA\Property(property="id", type="integer", readOnly="true", example="1"),
  *  @OA\Property(property="file_url", type="string", example="http://targeturl.com/uploads/images/name.png"),
+ *  @OA\Property(property="thumbnail_url", type="string", example="http://targeturl.com/uploads/images/name_thumbnail.png"),
  *  @OA\Property(property="type", type="string", example="png"),
  *  @OA\Property(property="size", type="integer", example="3453979"),
  *  @OA\Property(property="created_at", type="date", example="2022-05-25 22:15:23"),
