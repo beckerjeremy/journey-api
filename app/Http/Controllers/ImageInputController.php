@@ -34,7 +34,7 @@ class ImageInputController extends Controller
      */
     public function index()
     {
-        return ImageInputBasicResource::collection(ImageInput::all());
+        return ImageInputBasicResource::collection(ImageInput::paginate(100));
     }
 
     /**

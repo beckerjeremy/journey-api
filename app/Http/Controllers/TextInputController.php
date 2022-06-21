@@ -33,7 +33,7 @@ class TextInputController extends Controller
      */
     public function index()
     {
-        return TextInputBasicResource::collection(TextInput::all());
+        return TextInputBasicResource::collection(TextInput::paginate(100));
     }
 
     /**

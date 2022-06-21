@@ -32,7 +32,7 @@ class InputController extends Controller
      */
     public function index()
     {
-        return InputBasicResource::collection(Input::all());
+        return InputBasicResource::collection(Input::paginate(100));
     }
 
     /**

@@ -33,7 +33,7 @@ class JourneyController extends Controller
      */
     public function index()
     {
-        return JourneyBasicResource::collection(Journey::all());
+        return JourneyBasicResource::collection(Journey::paginate(100));
     }
 
     /**

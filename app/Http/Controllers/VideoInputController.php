@@ -34,7 +34,7 @@ class VideoInputController extends Controller
      */
     public function index()
     {
-        return VideoInputBasicResource::collection(VideoInput::all());
+        return VideoInputBasicResource::collection(VideoInput::paginate(100));
     }
 
     /**
