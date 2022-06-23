@@ -280,4 +280,19 @@ class VideoInputController extends Controller
         if ($videoInput->input) $videoInput->input->delete();
         $videoInput->delete();
     }
+
+    /*
+     * Download the video file.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\File
+     */
+    public function download($id)
+    {
+        $videoInput = VideoInput::findOrFail($id);
+        
+        $headers = ['Content-Type' => 'video/' . $videoInput->type];
+        $path = public_path($videoInput->file_url);
+        return response()->download($path, 'name', $headers);
+    }
 }

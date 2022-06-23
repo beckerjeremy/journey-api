@@ -91,4 +91,5 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('/video/{id}', 'VideoInputController@show');
     $router->patch('/video/{id}', 'VideoInputController@update');
     $router->delete('/video/{id}', 'VideoInputController@destroy');
+    $router->get('/video/{id}/download', 'VideoInputController@download');
 });
