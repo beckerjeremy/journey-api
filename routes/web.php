@@ -85,6 +85,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('/image/{id}', 'ImageInputController@show');
     $router->patch('/image/{id}', 'ImageInputController@update');
     $router->delete('/image/{id}', 'ImageInputController@destroy');
+    $router->get('/image/{id}/download', 'ImageInputController@download');
 
     $router->get('/video', 'VideoInputController@index');
     $router->post('/video', 'VideoInputController@store');

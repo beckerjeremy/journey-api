@@ -293,6 +293,6 @@ class VideoInputController extends Controller
         
         $headers = ['Content-Type' => 'video/' . $videoInput->type];
         $path = public_path($videoInput->file_url);
-        return response()->download($path, 'name', $headers);
+        return response()->download($path, $headers);
     }
 }

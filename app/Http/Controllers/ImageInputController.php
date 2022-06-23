@@ -269,4 +269,19 @@ class ImageInputController extends Controller
         if ($imageInput->input) $imageInput->input->delete();
         $imageInput->delete();
     }
+
+    /*
+     * Download the image file.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\File
+     */
+    public function download($id)
+    {
+        $imageInput = ImageInput::findOrFail($id);
+        
+        $headers = ['Content-Type' => 'image/' . $imageInput->type];
+        $path = public_path($imageInput->file_url);
+        return response()->file($path, $headers);
+    }
 }
