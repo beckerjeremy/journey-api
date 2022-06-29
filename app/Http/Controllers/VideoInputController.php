@@ -97,21 +97,14 @@ class VideoInputController extends Controller
         $destination = public_path($video_path);
         File::makeDirectory($destination, 0777, true, true);
 
-        $ffmpeg = FFMpeg::create();
-        $video = $ffmpeg->open($video->path());
-        $frame_name = $video_unique . '_thumbnail.jpg';
-        $frame = $video->frame(TimeCode::fromSeconds(1));
-        $frame->save($destination . $frame_name);
-        $img = Image::make($destination . $frame_name);
-        $img->resize(200, 200, function ($const) {
-            $const->aspectRatio();
-        })->save($destination . $frame_name);
-
         $request->file('video')->move($destination, $video_name);
+
+        $cmd = "ffmpeg -itsoffset -1 -i " . $destination . $video_name . " -vframes 1 -filter:v scale='200:-1' " . $destination . $video_unique . "_thumbnail.jpg 2>&1";
+        exec($cmd, $output, $retval);
 
         $videoInput = new VideoInput;
         $videoInput->file_url = $video_path . $video_name;
-        $videoInput->thumbnail_url = $video_path . $frame_name;
+        $videoInput->thumbnail_url = $video_path . $video_unique . '_thumbnail.jpg';
         $videoInput->type = $video_extension;
         $videoInput->size = $video_size;
         $videoInput->save();
@@ -222,21 +215,14 @@ class VideoInputController extends Controller
         $destination = public_path($video_path);
         File::makeDirectory($destination, 0777, true, true);
 
-        $ffmpeg = FFMpeg::create();
-        $video = $ffmpeg->open($video->path());
-        $frame_name = $video_unique . '_thumbnail.jpg';
-        $frame = $video->frame(TimeCode::fromSeconds(1));
-        $frame->save($destination . $frame_name);
-        $img = Image::make($destination . $frame_name);
-        $img->resize(200, 200, function ($const) {
-            $const->aspectRatio();
-        })->save($destination . $frame_name);
-
         $request->file('video')->move($destination, $video_name);
+
+        $cmd = "ffmpeg -itsoffset -1 -i " . $destination . $video_name . " -vframes 1 -filter:v scale='200:-1' " . $destination . $video_unique . "_thumbnail.jpg 2>&1";
+        exec($cmd, $output, $retval);
 
         $videoInput = VideoInput::findOrFail($id);
         $videoInput->file_url = $video_path . $video_name;
-        $videoInput->thumbnail_url = $video_path . $frame_name;
+        $videoInput->thumbnail_url = $video_path . $video_unique . '_thumbnail.jpg';
         $videoInput->type = $video_extension;
         $videoInput->size = $video_size;
         $videoInput->save();
