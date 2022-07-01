@@ -280,8 +280,8 @@ class ImageInputController extends Controller
     {
         $imageInput = ImageInput::findOrFail($id);
         
-        $headers = ['Content-Type' => 'image/' . $imageInput->type];
+        $headers = ['Content-Type' => 'video/' . $imageInput->type];
         $path = public_path($imageInput->file_url);
-        return response()->file($path, $headers);
+        return response()->download($path, 'bluespace.' . $imageInput->type, $headers);
     }
 }
