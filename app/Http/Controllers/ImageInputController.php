@@ -282,6 +282,18 @@ class ImageInputController extends Controller
         
         $headers = ['Content-Type' => 'video/' . $imageInput->type];
         $path = public_path($imageInput->file_url);
-        return response()->download($path, 'bluespace.' . $imageInput->type, $headers);
+
+        $input_id = $imageInput->input->id;
+        $token = '';
+
+        if (
+            $imageInput->input &&
+            $imageInput->input->journey_action &&
+            $imageInput->input->journey_action->journey_activity &&
+            $imageInput->input->journey_action->journey_activity->journey &&
+            $imageInput->input->journey_action->journey_activity->journey->user
+        )$token = $imageInput->input->journey_action->journey_activity->journey->user->token;
+
+        return response()->download($path, $token . '_' . $input_id . '.' . $imageInput->type, $headers);
     }
 }
