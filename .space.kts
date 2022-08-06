@@ -4,7 +4,7 @@
 * For more info, see https://www.jetbrains.com/help/space/automation.html
 */
 
-job("Hello World!") {
+job("Run Tests") {
     container(image = "composer:2.3") {
     	shellScript {
             content =  """
@@ -18,7 +18,5 @@ job("Hello World!") {
     	beforeBuildScript {
             "cp /mnt/space/share docker"
         }
-        
-        build {}
     }
 }
