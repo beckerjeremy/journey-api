@@ -15,7 +15,7 @@ job("Run Tests") {
                     ./vendor/bin/phpunit --log-junit ~/phpunit/junit.xml
                     
                     echo Uploading artifacts...
-                    SOURCE_PATH=build-logs/log.txt
+                    SOURCE_PATH=~/phpunit/junit.xml
                 	TARGET_PATH=logs/${'$'}JB_SPACE_EXECUTION_NUMBER/
                 	REPO_URL=http://packages.becker.dev/files/p/journey-api/files
                 	curl -i -H "Authorization: Bearer ${'$'}JB_SPACE_CLIENT_TOKEN" -F file=@"${'$'}SOURCE_PATH" ${'$'}REPO_URL/${'$'}TARGET_PATH
