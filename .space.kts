@@ -9,7 +9,7 @@ job("Hello World!") {
     	shellScript {
             content =  """
             		composer install
-                    ./vendor/bin/phpunit > /mnt/space/share
+                    ./vendor/bin/phpunit > /mnt/space/share/tests.txt
                 """
         }
     }
