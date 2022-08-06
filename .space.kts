@@ -9,8 +9,16 @@ job("Hello World!") {
     	shellScript {
             content =  """
             		composer install
-                    ./vendor/bin/phpunit
+                    ./vendor/bin/phpunit > /mnt/space/share
                 """
         }
+    }
+    
+    docker {
+    	beforeBuildScript {
+            "cp /mnt/space/share docker"
+        }
+        
+        build {}
     }
 }
